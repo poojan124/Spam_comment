@@ -38,6 +38,9 @@ Description of all Methods:
 -->feature selection : Purpose : using term frequecy of a word in corpus select some most frequent word as features - 
                       Parameters : Pandas dataframe obj - Return : pandas dataframe    
 
+-->preprocess : Purpose : run all needed mothod for preprocess data in one go. - Parameters : None - Returns : a list of    
+                objects [train-data, test-data, features]
+
 '''
        
 def get_clean():
@@ -85,12 +88,17 @@ def feature_selection(data_train):
     features = [x for x,y in c.items() if y>3]
     print("Total Number of features to use : " + str(len(features)))
     return features
-    
-if __name__=='__main__':
+
+def preprocess():
     data = get_clean()
     data = process(data)
     data = remove_punc(data)
     data = remove_stopwords(data)
     data_train,data_test = train_test_split(data,test_size = 0.25,random_state = 42)
     features = feature_selection(data_train)
+    return [data_train, data_test, features]
     
+if __name__=='__main__':
+    dt,dte,feature = np.array(preprocess()).ravel()
+    print(dt.shape)
+    print(dte.shape)
