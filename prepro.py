@@ -81,7 +81,6 @@ def feature_selection(data_train):
     token = []
     for idx,x in data_train.iterrows():
         token = token + word_tokenize(x['CONTENT'])
-    print(len(token))
     token = ["_link_feature_" if x.find('http')!=-1 else x for x in token]
     token = ["_link_feature_" if x.find('watch')!=-1 and len(x)>9 else x for x in token]
     c= Counter(token)
