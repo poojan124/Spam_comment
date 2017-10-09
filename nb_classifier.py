@@ -54,7 +54,10 @@ def cal_prob():
             prob_spam[key] = value[0]/float(value[0]+value[1])
             prob_ham[key] = value[1]/float(value[0]+value[1])
     return [prob_spam,prob_ham]
-    
+
+pspam,pham = np.array(prior_prob()).ravel()
+prob_spam,prob_ham = np.array(cal_prob()).ravel()    
+
 def classify(s):
     prospam = 1.0
     proham = 1.0
